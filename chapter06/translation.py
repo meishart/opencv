@@ -21,6 +21,6 @@ shifted = cv2.warpAffine(image, M, (image.shape[1], image.shape[0]))
 cv2.imshow("Shifted Up and Left", shifted)
 
 # shift using imutils
-shifted = imutils.my_translate(image, 0, 50);
+shifted = imutils.translate(image, 0, 50);
 cv2.imshow("Shifted Imutils", shifted)
 cv2.waitKey(0)

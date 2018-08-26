@@ -23,4 +23,12 @@ cv2.imshow("Mask", mask)
 
 masked = cv2.bitwise_and(image, image, mask=mask)
 cv2.imshow("Masked", masked)
+#cv2.waitKey(0)
+
+mask = np.zeros(image.shape[:2], dtype="uint8")
+cv2.circle(mask, (cX, cY), 100, 255, -1)
+cv2.imshow("CircleMask", mask)
+
+masked = cv2.bitwise_and(image, image, mask=mask)
+cv2.imshow("Circled", masked)
 cv2.waitKey(0)

@@ -1,0 +1,28 @@
+import numpy as np
+import argparse
+import cv2
+import imutils
+
+ap = argparse.ArgumentParser()
+ap.add_argument("-i", "--image", required=True, help="path to the image")
+args = vars(ap.parse_args())
+
+image = cv2.imread(args["image"])
+image = imutils.resize(image, width=300)
+
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+blurred = cv2.GaussianBlur(image, (5, 5), 0)
+cv2.imshow("Image", blurred)
+
+(T, thresh) = cv2.threshold(blurred, 180, 255, cv2.THRESH_BINARY)
+cv2.imshow("Threshold Binary", thresh)
+
+(T, threshInv) = cv2.threshold(blurred, 180, 255, cv2.THRESH_BINARY_INV)
+cv2.imshow("Threshold Binary Inverse", threshInv)
+
+masked = cv2.bitwise_and(image, image, mask = threshInv)
+cv2.imshow("Coins", masked)
+
+cv2.waitKey(0)
+
+
